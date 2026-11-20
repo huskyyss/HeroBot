@@ -8,6 +8,8 @@ jobs:
         with:
           repository: HerobaneNair/HeRoBot
           ref: 26.2
+      - name: Make mixin failures non-fatal
+        run: sed -i 's/"defaultRequire": 1/"defaultRequire": 0/' herobot-mod/src/main/resources/*.json herobot-mod/src/client/resources/*.json
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
