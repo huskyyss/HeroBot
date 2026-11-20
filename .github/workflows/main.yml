@@ -1,0 +1,21 @@
+name: Build HeroBot
+on: workflow_dispatch
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: 26.2
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 25
+      - run: chmod +x gradlew
+      - run: ./gradlew :herobot-mod:shadowJar --no-daemon
+      - uses: actions/upload-artifact@v4
+        with:
+          name: herobot-fabric
+          path: |
+            herobot-mod/build/libs/*.jar
+            !herobot-mod/build/libs/*-sources.jar
