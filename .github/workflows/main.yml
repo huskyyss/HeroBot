@@ -8,9 +8,10 @@ jobs:
         with:
           repository: HerobaneNair/HeRoBot
           ref: 26.2
-      - name: Make mixin failures non-fatal
+      - name: Patch for Minecraft 26.3
         run: |
           sed -i 's/"defaultRequire": 1/"defaultRequire": 0/' herobot-mod/src/main/resources/*.json herobot-mod/src/client/resources/*.json
+          sed -i 's/double camX, double camY, double camZ,$/double camX, double camY, double camZ, float herobotPartialTick,/' herobot-mod/src/client/java/hero/bane/herobot/mod/client/mixin/EntityRenderDispatcherMixin.java
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
